@@ -3,12 +3,12 @@
 Renderer::Renderer(std::string dimension, int maxVerticesSize, unsigned int *indices,
      int sizeIndex, const std::string& shaderPath, const std::string& texturePath)
     : vb(nullptr, maxVerticesSize, GL_DYNAMIC_DRAW), shader(shaderPath),
-        texture(texturePath, dimension),ib(indices, sizeIndex, GL_DYNAMIC_DRAW)
+        texture(texturePath, dimension), ib(indices, sizeIndex, GL_DYNAMIC_DRAW)
     //: vb(vertices, sizeVertex, GL_DYNAMIC_DRAW), ib(indices, sizeIndex, GL_DYNAMIC_DRAW)
 {
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA), __FILE__, __LINE__);
     GLCall(glEnable(GL_BLEND), __FILE__, __LINE__);
-    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); //glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
+    //glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); //glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE); 
 
