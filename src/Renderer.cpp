@@ -8,8 +8,14 @@ Renderer::Renderer(std::string dimension, int maxVerticesSize, unsigned int *ind
 {
     GLCall(glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA), __FILE__, __LINE__);
     GLCall(glEnable(GL_BLEND), __FILE__, __LINE__);
+    glPolygonMode( GL_FRONT_AND_BACK, GL_LINE ); //glPolygonMode( GL_FRONT_AND_BACK, GL_FILL );
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_MULTISAMPLE); 
+
+    glEnable(GL_CULL_FACE);
+    glCullFace(GL_BACK);
+    glFrontFace(GL_CW);  
+
 
     Bind();
 

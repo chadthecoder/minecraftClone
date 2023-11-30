@@ -397,8 +397,6 @@ int main(void)
 
     Renderer renderer("3D", sizeof(openglStuff::Vertex) * maxVertexCount, indicesCube,
         maxIndexCount, "res/shaders/Basic.shader", "res/img/brick.png");
-    
-    
 
     //renderer.SetUniform1i("u_Texture", 0);
 
@@ -453,11 +451,11 @@ int main(void)
             bufferC = renderer.Cube2(bufferC, x2, y2, z2);
             counts testy;
             //std::cout << "rend 1: " << x2 << " : " << y2 << " : " << z2 << "\n";
-            testy = renderBlocksUnder(renderer, bufferC, x2, y2, z2, indexCount, vertexCount);
+            //testy = renderBlocksUnder(renderer, bufferC, x2, y2, z2, indexCount, vertexCount);
             //std::cout << "rend 2: " << indexCount << " : " << vertexCount << "\n";
-            indexCount += testy.indexCount;
-            vertexCount += testy.vertexCount;
-            bufferC = testy.bufferC;
+            //indexCount += testy.indexCount;
+            //vertexCount += testy.vertexCount;
+            //bufferC = testy.bufferC;
             bufferC = renderer.Cube2(bufferC, x2, y2, z2);
             indexCount += 36;
             vertexCount += vertPerCube;
@@ -544,7 +542,7 @@ int main(void)
     //setup camera
     Camera camera(mode->width, mode->height, glm::vec3(0.8f, 0.8f, 3.0f));
     
-    std::cout << "hi2\n";
+    //std::cout << "hi2\n";
 
     //renderer.Bind();
 
