@@ -1,6 +1,6 @@
 #include "Renderer.hpp"
 
-Renderer::Renderer(std::string dimension, int maxVerticesSize, unsigned int *indices,
+Renderer::Renderer(std::string dimension, unsigned int maxVerticesSize, unsigned int *indices,
      int sizeIndex, const std::string& shaderPath, const std::string& texturePath)
     : vb(nullptr, maxVerticesSize, GL_DYNAMIC_DRAW), shader(shaderPath),
         texture(texturePath, dimension), ib(indices, sizeIndex, GL_DYNAMIC_DRAW)
@@ -255,6 +255,8 @@ openglStuff::Vertex* Renderer::Cube2(openglStuff::Vertex* target, float x, float
         -0.5f,  0.5f,  0.5f,  0.0f, 0.0f,
         -0.5f,  0.5f, -0.5f,  0.0f, 1.0f */
 
+    //std::cout << "cube in: " << target << "\n";
+
     //left
     //openglStuff::Vertex v0;
     //float* data = glm::value_ptr(vec);
@@ -488,6 +490,8 @@ openglStuff::Vertex* Renderer::Cube2(openglStuff::Vertex* target, float x, float
     target->Color = glm::vec3(0.83f, 0.70f, 0.44);
     target->Texture = glm::vec2(1.0f, 0.0f);
     target++;
+
+    //std::cout << "cube out: " << target << "\n";
 
     return target;
 }

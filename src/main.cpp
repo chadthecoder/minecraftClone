@@ -73,12 +73,12 @@ void keyCallback(GLFWwindow *window, int key, int scancode, int action, int mods
 }
 
 struct counts {
-  size_t vertexCount;
+  unsigned int vertexCount;
   uint32_t indexCount;
   openglStuff::Vertex* bufferC;
 } ;
 
-counts renderBlocksUnder(Renderer& rend, openglStuff::Vertex* bufferC, float x, float y, float z, uint32_t indexCount, size_t vertexCount)
+counts renderBlocksUnder(Renderer& rend, openglStuff::Vertex* bufferC, float x, float y, float z, uint32_t indexCount, unsigned int vertexCount)
 {
     y--;
     //size_t test [2]; //0-indexCount, 1-vertexCount
@@ -159,7 +159,7 @@ int main(void)
     //Shader shader("res/shaders/Basic.shader");
     //shader.Bind();
 
-    const size_t vertPerPoint = sizeof(openglStuff::Vertex); //8;
+    /* const size_t vertPerPoint = sizeof(openglStuff::Vertex); //8;
     const size_t vertPerCube = vertPerPoint * 36; //vertPerPoint * 8;
     const size_t indexPerCube = 36;
     //const size_t strideC = indexPerCube;
@@ -167,7 +167,17 @@ int main(void)
     const size_t maxCubeCount = 213; //203 is 6, 204-12 is 7 //166; //increasingly incorrect
     //const size_t maxQuadCount = maxCubeCount * 6;
     const size_t maxVertexCount = maxCubeCount * vertPerCube;
-    const size_t maxIndexCount = maxCubeCount * indexPerCube;
+    const size_t maxIndexCount = maxCubeCount * indexPerCube; */
+
+    const unsigned int vertPerPoint = sizeof(openglStuff::Vertex); //8;
+    const unsigned int vertPerCube = vertPerPoint * 36; //vertPerPoint * 8;
+    const unsigned int indexPerCube = 36;
+    //const unsigned int strideC = indexPerCube;
+    //const unsigned int numCube = 166; //memory leak causes less to be able to be drawn w/o creating a segfault?
+    const unsigned int maxCubeCount = 213; //203 is 6, 204-12 is 7 //166; //increasingly incorrect
+    //const unsigned int maxQuadCount = maxCubeCount * 6;
+    const unsigned int maxVertexCount = maxCubeCount * vertPerCube;
+    const unsigned int maxIndexCount = maxCubeCount * indexPerCube;
 
     //positions and indices
 
@@ -395,7 +405,7 @@ int main(void)
     //Texture texture("res/img/brick.png", "3D");
     //texture.Bind();
 
-    Renderer renderer("3D", maxCubeCount * 36 * 8 * sizeof(float), indicesCube,
+    Renderer renderer("3D", maxCubeCount * 256 * 8 * sizeof(float), indicesCube, //256 should be 36
         maxIndexCount, "res/shaders/Basic.shader", "res/img/brick.png");
 
     //renderer.SetUniform1i("u_Texture", 0);
@@ -408,9 +418,11 @@ int main(void)
     memcpy(verticesPyramid+q0.size(), q1.data(), q1.size()*sizeof(openglStuff::Vertex));
 
 
-    size_t vertexCount = 0;
+    unsigned int vertexCount = 0;
     std::array<openglStuff::Vertex, maxVertexCount> verticesCube;
     openglStuff::Vertex* bufferC = verticesCube.data();
+
+    std::cout << "buffer before: " << bufferC << "\n";
 
     //bufferC = renderer.Cube2(bufferC, 0.0f, 0.0f, 0.0f);
 
@@ -424,15 +436,15 @@ int main(void)
         }
     } */
 
+    std::cout << "hi: " << GL_MAX_GEOMETRY_OUTPUT_VERTICES << " : " << GL_MAX_ELEMENTS_VERTICES << "\n"; // max is 114 cubes?
+    //<< sizeof(float) << " : " << sizeof(openglStuff::Vertex) << " : " << sizeof(openglStuff::Vertex)/sizeof(float) << "\n";
+
     const siv::PerlinNoise::seed_type seed = 123456u;
-
-    std::cout << "hi: " << GL_MAX_GEOMETRY_OUTPUT_VERTICES << "\n";
-
 	const siv::PerlinNoise perlin{ seed };
 
     int testyInc = 0;
 
-	for (int y = 0; y < 1; ++y)
+	for (int y = 0; y < 16; ++y)
 	{
 		for (int x = 0; x < 16; ++x)
 		{
@@ -453,15 +465,16 @@ int main(void)
             float z2 = -(float)y;
 
             bufferC = renderer.Cube2(bufferC, x2, y2, z2);
+            std::cout <<  "hi2: " << renderer.Cube2(bufferC, x2, y2, z2) << "\n";
             counts testy;
             testyInc++;
             std::cout << "inc: " << testyInc << "\n";
             //std::cout << "rend 1: " << x2 << " : " << y2 << " : " << z2 << "\n";
-            testy = renderBlocksUnder(renderer, bufferC, x2, y2, z2, indexCount, vertexCount);
+            //testy = renderBlocksUnder(renderer, bufferC, x2, y2, z2, indexCount, vertexCount);
             //std::cout << "rend 2: " << indexCount << " : " << vertexCount << "\n";
-            indexCount += testy.indexCount;
-            vertexCount += testy.vertexCount;
-            bufferC = testy.bufferC;
+            //indexCount += testy.indexCount;
+            //vertexCount += testy.vertexCount;
+            //bufferC = testy.bufferC;
             std::cout << "rend 3: " << testy.indexCount << " : " << testy.vertexCount << " : " << testy.bufferC << "\n";
             //stuck right after 6840 and 164448
             //bufferC = renderer.Cube2(bufferC, x2, y2, z2);
@@ -475,6 +488,10 @@ int main(void)
 
 		//std::cout << '\n';
 	}
+
+    std::cout << "buffer after: " << bufferC << "\n";
+    std::cout << "first after: " << &verticesCube.front() << "\n";
+    std::cout << "data after: " << verticesCube.data() << "\n";
 
     //create vertex buffer for numCubes, can change Cube function to change color and texture of cubes
     /* openglStuff::Vertex verticesCube[vertPerCube*numCube];
@@ -513,7 +530,7 @@ int main(void)
     ImGui::StyleColorsDark();
     //ImGui::StyleColorsLight();
 
-    // Setup Platform/Renderer backends
+    // Setup Platform/backends
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init(glsl_version); */
 
@@ -589,6 +606,7 @@ clock_t fps = 0;
         //std::cout << "vertex count: " << vertexCount << "\n";
         //std::cout << "hi2\n";
         renderer.Draw(verticesCube.data(), maxCubeCount * 36 * 8 * sizeof(float));//25 * vertPerCube * sizeof(openglStuff::Vertex)); // vertexCount * sizeof(float));
+        //256 should be 36
         //std::cout << "size: " << sizeof(float) << "\n";
         //std::cout << "hi3\n";
 

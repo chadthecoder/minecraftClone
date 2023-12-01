@@ -23,7 +23,7 @@ private:
     Texture texture;
 public:
     //Renderer(std::string dimension, float *vertices, int sizeVertex, unsigned int *indices, int sizeIndex);
-    Renderer(std::string dimension, int maxVerticesSize, unsigned int *indices,
+    Renderer(std::string dimension, unsigned int maxVerticesSize, unsigned int *indices,
         int sizeIndex, const std::string& shaderPath, const std::string& texturePath);
     ~Renderer();
 
