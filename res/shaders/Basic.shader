@@ -11,6 +11,8 @@ layout(location = 2) in vec2 aTex;
 uniform float u_gScale;
 uniform float u_incLoc;
 
+uniform vec2 u_instance2;
+
 out vec3 v_color;
 out vec2 v_texCoord;
 
