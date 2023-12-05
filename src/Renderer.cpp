@@ -1,7 +1,7 @@
 #include "Renderer.hpp"
 
-Renderer::Renderer(std::string dimension, unsigned int maxVerticesSize, unsigned int *indices,
-     int sizeIndex, const std::string& shaderPath, const std::string& texturePath)
+Renderer::Renderer(std::string dimension, unsigned int maxVerticesSize, const void *indices,
+     GLsizeiptr sizeIndex, const std::string& shaderPath, const std::string& texturePath)
     : vb(nullptr, maxVerticesSize, GL_DYNAMIC_DRAW), shader(shaderPath),
         texture(texturePath, dimension), ib(indices, sizeIndex, GL_DYNAMIC_DRAW)
     //: vb(vertices, sizeVertex, GL_DYNAMIC_DRAW), ib(indices, sizeIndex, GL_DYNAMIC_DRAW)
@@ -507,7 +507,7 @@ void Renderer::Draw(const void* data, unsigned int size) const //Draw(float* ver
     //std::cout << "subdata: " << size << " : " << data << "\n";
     GLCall(glBufferSubData(GL_ARRAY_BUFFER, 0, size, data), __FILE__, __LINE__);
 
-    GLCall(glDrawElements(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr), __FILE__, __LINE__);
+    GLCall(glDrawElementsInstanced(GL_TRIANGLES, ib.GetCount(), GL_UNSIGNED_INT, nullptr, 3), __FILE__, __LINE__);
     //ib.GetCountPrint();
     //GLCall(glDrawArrays(GL_TRIANGLES, 0, (36*20*20)), __FILE__, __LINE__);
 }

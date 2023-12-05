@@ -177,7 +177,7 @@ int main(void)
     const unsigned int maxCubeCount = 213; //203 is 6, 204-12 is 7 //166; //increasingly incorrect
     //const unsigned int maxQuadCount = maxCubeCount * 6;
     const unsigned int maxVertexCount = maxCubeCount * vertPerCube;
-    const unsigned int maxIndexCount = maxCubeCount * indexPerCube;
+    GLsizeiptr maxIndexCount = maxCubeCount * indexPerCube;
 
     //positions and indices
 
@@ -405,8 +405,11 @@ int main(void)
     //Texture texture("res/img/brick.png", "3D");
     //texture.Bind();
 
-    Renderer renderer("3D", maxCubeCount * 256 * 8 * sizeof(float), indicesCube, //256 should be 36
+    Renderer renderer("3D", 166 * 36 *  sizeof(openglStuff::Vertex), indicesCube, //256 should be 36
         maxIndexCount, "res/shaders/Basic.shader", "res/img/brick.png");
+
+    renderer.SetUniform4f("u_instance1", 1.0f, 1.0f, 1.0f, 1.0f);
+    renderer.SetUniform4f("u_instance2", 1.0f, 1.0f, 2.0f, 1.0f);
 
     //renderer.SetUniform1i("u_Texture", 0);
 
@@ -436,15 +439,15 @@ int main(void)
         }
     } */
 
-    std::cout << "hi: " << GL_MAX_GEOMETRY_OUTPUT_VERTICES << " : " << GL_MAX_ELEMENTS_VERTICES << "\n"; // max is 114 cubes?
-    //<< sizeof(float) << " : " << sizeof(openglStuff::Vertex) << " : " << sizeof(openglStuff::Vertex)/sizeof(float) << "\n";
+    std::cout << "hi: " << GL_MAX_GEOMETRY_OUTPUT_VERTICES << " : " << GL_MAX_ELEMENTS_VERTICES << "\n" // max is 114 cubes?
+    << sizeof(float) << " : " << sizeof(openglStuff::Vertex) << " : " << sizeof(openglStuff::Vertex)/sizeof(float) << "\n";
 
     const siv::PerlinNoise::seed_type seed = 123456u;
 	const siv::PerlinNoise perlin{ seed };
 
-    int testyInc = 0;
+    unsigned int testyInc = 0;
 
-	for (int y = 0; y < 16; ++y)
+	for (int y = 0; y < 5; ++y)
 	{
 		for (int x = 0; x < 16; ++x)
 		{
@@ -604,8 +607,8 @@ clock_t fps = 0;
         //std::cout << "size: " << sizeof(float) << "\n";
 
         //std::cout << "vertex count: " << vertexCount << "\n";
-        //std::cout << "hi2\n";
-        renderer.Draw(verticesCube.data(), maxCubeCount * 36 * 8 * sizeof(float));//25 * vertPerCube * sizeof(openglStuff::Vertex)); // vertexCount * sizeof(float));
+        std::cout << "num cubes?: " << testyInc << "\n";
+        renderer.Draw(verticesCube.data(), testyInc * 36  * sizeof(openglStuff::Vertex));//25 * vertPerCube * sizeof(openglStuff::Vertex)); // vertexCount * sizeof(float));
         //256 should be 36
         //std::cout << "size: " << sizeof(float) << "\n";
         //std::cout << "hi3\n";

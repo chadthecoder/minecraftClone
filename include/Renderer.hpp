@@ -12,8 +12,8 @@ class Renderer
 private:
     float *vertices;
     int sizeVertex;
-    unsigned int *indices;
-    int sizeIndex;
+    const void *indices;
+    GLsizeiptr sizeIndex;
 
     VertexArray va;
     VertexBuffer vb;
@@ -23,8 +23,8 @@ private:
     Texture texture;
 public:
     //Renderer(std::string dimension, float *vertices, int sizeVertex, unsigned int *indices, int sizeIndex);
-    Renderer(std::string dimension, unsigned int maxVerticesSize, unsigned int *indices,
-        int sizeIndex, const std::string& shaderPath, const std::string& texturePath);
+    Renderer(std::string dimension, unsigned int maxVerticesSize, const void *indices,
+        GLsizeiptr sizeIndex, const std::string& shaderPath, const std::string& texturePath);
     ~Renderer();
 
     static std::array<openglStuff::Vertex, 5> Pyramid(float x, float y, float z);
