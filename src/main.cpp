@@ -177,7 +177,8 @@ int main(void)
     const unsigned int maxCubeCount = 213; //203 is 6, 204-12 is 7 //166; //increasingly incorrect
     //const unsigned int maxQuadCount = maxCubeCount * 6;
     const unsigned int maxVertexCount = maxCubeCount * vertPerCube;
-    GLsizeiptr maxIndexCount = maxCubeCount * indexPerCube;
+    //GLsizeiptr maxIndexCount = maxCubeCount * indexPerCube;
+    size_t maxIndexCount = maxCubeCount * indexPerCube;
 
     //positions and indices
 
@@ -275,9 +276,9 @@ int main(void)
         }; */
 
         //add cubeIndices
-        uint32_t indicesCube[maxIndexCount];
+       /*  uint32_t indicesCube[maxIndexCount];
         uint32_t offset = 0;
-        uint32_t indexCount = 0;
+        uint32_t indexCount = 0; */
         /* for(size_t i = 0; i < maxIndexCount; i += indexPerCube)
         {
             indicesCube[i+0] = 4 + offset;
@@ -326,6 +327,11 @@ int main(void)
 
             offset += vertPerPoint;
         } */
+
+        uint32_t indicesCube[maxIndexCount];
+        uint32_t offset = 0;
+        uint32_t indexCount = 0;
+
         for(size_t i = 0; i < maxIndexCount; i += indexPerCube)
         {
             indicesCube[i+0] = 0 + offset;
@@ -439,7 +445,11 @@ int main(void)
         }
     } */
 
-    std::cout << "hi: " << GL_MAX_GEOMETRY_OUTPUT_VERTICES << " : " << GL_MAX_ELEMENTS_VERTICES << "\n" // max is 114 cubes?
+    GLint funnyTestInt1, funnyTestInt2;
+    glGetIntegerv(GL_MAX_ELEMENTS_VERTICES, &funnyTestInt1);
+    glGetIntegerv(GL_MAX_ELEMENTS_INDICES, &funnyTestInt2);
+
+    std::cout << "hi: " << GL_MAX_GEOMETRY_OUTPUT_VERTICES << " : " << GL_MAX_ELEMENTS_VERTICES << " : " << funnyTestInt1 << " : " << funnyTestInt2 << "\n" // max is 114 cubes?
     << sizeof(float) << " : " << sizeof(openglStuff::Vertex) << " : " << sizeof(openglStuff::Vertex)/sizeof(float) << "\n";
 
     const siv::PerlinNoise::seed_type seed = 123456u;
@@ -607,7 +617,7 @@ clock_t fps = 0;
         //std::cout << "size: " << sizeof(float) << "\n";
 
         //std::cout << "vertex count: " << vertexCount << "\n";
-        std::cout << "num cubes?: " << testyInc << "\n";
+        //std::cout << "num cubes?: " << testyInc << "\n";
         renderer.Draw(verticesCube.data(), testyInc * 36  * sizeof(openglStuff::Vertex));//25 * vertPerCube * sizeof(openglStuff::Vertex)); // vertexCount * sizeof(float));
         //256 should be 36
         //std::cout << "size: " << sizeof(float) << "\n";
