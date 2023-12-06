@@ -411,8 +411,11 @@ int main(void)
     //Texture texture("res/img/brick.png", "3D");
     //texture.Bind();
 
-    Renderer renderer("3D", 166 * 36 *  sizeof(openglStuff::Vertex), indicesCube, //256 should be 36
-        maxIndexCount, "res/shaders/Basic.shader", "res/img/brick.png");
+    /* Renderer renderer("3D", 166 * 36 *  sizeof(openglStuff::Vertex), indicesCube, //256 should be 36
+        maxIndexCount, "res/shaders/Basic.shader", "res/img/brick.png"); */
+
+    Renderer renderer("3D", 8 * 4 * sizeof(GLfloat), indices, //256 should be 36
+        6, "res/shaders/Basic.shader", "res/img/brick.png");
 
     renderer.SetUniform4f("u_instance1", 1.0f, 1.0f, 1.0f, 1.0f);
     renderer.SetUniform4f("u_instance2", 1.0f, 1.0f, 2.0f, 1.0f);

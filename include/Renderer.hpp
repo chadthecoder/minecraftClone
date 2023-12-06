@@ -27,8 +27,9 @@ public:
         GLsizeiptr sizeIndex, const std::string& shaderPath, const std::string& texturePath);
     ~Renderer();
 
-    static std::array<openglStuff::Vertex, 5> Pyramid(float x, float y, float z);
+    //static std::array<openglStuff::Vertex, 5> Pyramid(float x, float y, float z);
     //static std::array<openglStuff::Vertex, 8> Cube(float x, float y, float z);
+    VertexValue* Square(VertexValue* target, GLfloat x, GLfloat y, GLfloat z);
     openglStuff::Vertex* Cube(openglStuff::Vertex* target, float x, float y, float z);
     openglStuff::Vertex* Cube2(openglStuff::Vertex* target, float x, float y, float z);
 

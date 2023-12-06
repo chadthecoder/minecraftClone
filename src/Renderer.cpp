@@ -49,6 +49,68 @@ Renderer::~Renderer()
     Unbind();
 }
 
+VertexValue* Renderer::Square(VertexValue* target, GLfloat x, GLfloat y, GLfloat z)
+{
+    //openglStuff::Vertex v0;
+    target->pos[0] = x+0.0f;
+    target->pos[1] = x+0.0f;
+    target->pos[2] = x+0.0f;
+    target->col[0] = 0.83f;
+    target->col[1] = 0.70f;
+    target->col[2] = 0.44f;
+    target->tex[0] = 0.0f;
+    target->tex[1] = 0.0f;
+    target++;
+
+    //change values after this to be like above
+
+    //openglStuff::Vertex v1;
+    v1.Position = glm::vec3(x+0.0f, y+1.0f, z+0.0f);
+    v1.Color = glm::vec3(0.83f, 0.70f, 0.44);
+    v1.Texture = glm::vec2(0.0f, 1.0f);
+
+    target->pos[0] = x+0.0f;
+    target->pos[1] = x+0.0f;
+    target->pos[2] = x+0.0f;
+    target->col[0] = 0.83f;
+    target->col[1] = 0.70f;
+    target->col[2] = 0.44f;
+    target->tex[0] = 0.0f;
+    target->tex[1] = 0.0f;
+    target++;
+
+    //openglStuff::Vertex v2;
+    v2.Position = glm::vec3(x+1.0f, y+1.0f, z+0.0f);
+    v2.Color = glm::vec3(0.83f, 0.70f, 0.44);
+    v2.Texture = glm::vec2(1.0f, 1.0f);
+
+    target->pos[0] = x+0.0f;
+    target->pos[1] = x+0.0f;
+    target->pos[2] = x+0.0f;
+    target->col[0] = 0.83f;
+    target->col[1] = 0.70f;
+    target->col[2] = 0.44f;
+    target->tex[0] = 0.0f;
+    target->tex[1] = 0.0f;
+    target++;
+
+    //openglStuff::Vertex v3;
+    v3.Position = glm::vec3(x+1.0f, y+0.0f,  z+0.0f);
+    v3.Color = glm::vec3(0.83f, 0.70f, 0.44);
+    v3.Texture = glm::vec2(1.0f, 0.0f);
+
+    target->pos[0] = x+0.0f;
+    target->pos[1] = x+0.0f;
+    target->pos[2] = x+0.0f;
+    target->col[0] = 0.83f;
+    target->col[1] = 0.70f;
+    target->col[2] = 0.44f;
+    target->tex[0] = 0.0f;
+    target->tex[1] = 0.0f;
+    target++;
+
+    return target;
+}
 
 //gives pyramid rendered in positive directions from given point
 /* std::array<openglStuff::Vertex, 5> Renderer::Pyramid(float x, float y, float z)
@@ -157,6 +219,13 @@ openglStuff::Vertex* Renderer::Cube(openglStuff::Vertex* target, float x, float 
 
     //openglStuff::Vertex v0;
     //float* data = glm::value_ptr(vec);
+    openglStuff::Vertex testVertex;
+    VertexValue value1;
+
+    //testVertex.setPosition((GLfloat)x+0.0f, (GLfloat)y+0.0f,  (GLfloat)z+1.0f);
+    value1.pos[0] = (GLfloat)x+0.0f;
+    value1.pos[1] = (GLfloat)y+0.0f;
+    value1.pos[2] = (GLfloat)z+1.0f;
     target->Position = glm::vec3(x+0.0f, y+0.0f,  z+1.0f);
     target->Color = glm::vec3(0.83f, 0.70f, 0.44f);
     target->Texture = glm::vec2(0.0f, 0.0f);
