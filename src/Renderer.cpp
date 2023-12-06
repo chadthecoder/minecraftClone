@@ -51,16 +51,16 @@ Renderer::~Renderer()
 
 
 //gives pyramid rendered in positive directions from given point
-std::array<openglStuff::Vertex, 5> Renderer::Pyramid(float x, float y, float z)
+/* std::array<openglStuff::Vertex, 5> Renderer::Pyramid(float x, float y, float z)
 {
 
     float size = 1.0f;
 
-/* 0.0f, 0.5f,  1.0f,     0.83f, 0.70f, 0.44f,	    0.0f, 0.0f,
+ 0.0f, 0.5f,  1.0f,     0.83f, 0.70f, 0.44f,	    0.0f, 0.0f,
 	0.0f, 0.5f, 0.0f,     0.83f, 0.70f, 0.44f,	    5.0f, 0.0f,
 	1.0f, 0.5f, 0.0f,     0.83f, 0.70f, 0.44f,	    0.0f, 0.0f,
 	1.0f, 0.5f,  1.0f,     0.83f, 0.70f, 0.44f,	    5.0f, 0.0f,
-	0.5f, 1.3f,  0.5f,     0.92f, 0.86f, 0.76f,	    2.5f, 5.0f, */
+	0.5f, 1.3f,  0.5f,     0.92f, 0.86f, 0.76f,	    2.5f, 5.0f, 
 
     openglStuff::Vertex v0;
     //float* data = glm::value_ptr(vec);
@@ -89,7 +89,7 @@ std::array<openglStuff::Vertex, 5> Renderer::Pyramid(float x, float y, float z)
     v4.Texture = glm::vec2(2.5f, 5.0f);
 
     return { v0, v1, v2, v3, v4 };
-}
+} */
 
 //gives cube rendered in positive directions from given point
 /* std::array<openglStuff::Vertex, 8> Renderer::Cube(float x, float y, float z)
@@ -153,7 +153,7 @@ openglStuff::Vertex* Renderer::Cube(openglStuff::Vertex* target, float x, float 
 	0.0f, 0.5f, 0.0f,     0.83f, 0.70f, 0.44f,	    5.0f, 0.0f,
 	1.0f, 0.5f, 0.0f,     0.83f, 0.70f, 0.44f,	    0.0f, 0.0f,
 	1.0f, 0.5f,  1.0f,     0.83f, 0.70f, 0.44f,	    5.0f, 0.0f,
-	0.5f, 1.3f,  0.5f,     0.92f, 0.86f, 0.76f,	    2.5f, 5.0f, */
+	0.5f, 1.3f,  0.5f,     0.92f, 0.86f, 0.0.0f76f,	    2.5f, 5.0f, */
 
     //openglStuff::Vertex v0;
     //float* data = glm::value_ptr(vec);

@@ -18,9 +18,14 @@ namespace openglStuff {
     class Vertex
     {
     public:
-        glm::vec3 Position;
+        /* glm::vec3 Position;
         glm::vec3 Color;
-        glm::vec2 Texture;
+        glm::vec2 Texture; */
+
+        GLfloat Position[3];
+        GLfloat Color[3];
+        GLfloat Texture[2];
+
         //int TexIndex;
 
         Vertex(/* args */) {}
