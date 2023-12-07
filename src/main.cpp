@@ -211,6 +211,11 @@ int main(void)
         0, 1, 2,
         2, 3, 0 };
 
+    uint32_t indicesSquare[6] = {
+        0, 1, 2,
+        2, 3, 0
+    };
+
     std::vector<unsigned int> indicesPyramid {        
         0, 1, 2,
 	    0, 2, 3,
@@ -414,7 +419,7 @@ int main(void)
     /* Renderer renderer("3D", 166 * 36 *  sizeof(openglStuff::Vertex), indicesCube, //256 should be 36
         maxIndexCount, "res/shaders/Basic.shader", "res/img/brick.png"); */
 
-    Renderer renderer("3D", 8 * 4 * sizeof(GLfloat), indices, //256 should be 36
+    Renderer renderer("3D", 8 * 4 * sizeof(GLfloat), indicesSquare, //256 should be 36
         6, "res/shaders/Basic.shader", "res/img/brick.png");
 
     renderer.SetUniform4f("u_instance1", 1.0f, 1.0f, 1.0f, 1.0f);
@@ -423,11 +428,11 @@ int main(void)
     //renderer.SetUniform1i("u_Texture", 0);
 
     //create pyramids
-    auto q0 = renderer.Pyramid(0.0f, 0.0f, 0.0f);
-    auto q1 = renderer.Pyramid(1.0f, 0.0f, 0.0f);
-    openglStuff::Vertex verticesPyramid[10];
-    memcpy(verticesPyramid, q0.data(), q0.size()*sizeof(openglStuff::Vertex));
-    memcpy(verticesPyramid+q0.size(), q1.data(), q1.size()*sizeof(openglStuff::Vertex));
+    //auto q0 = renderer.Pyramid(0.0f, 0.0f, 0.0f);
+    //auto q1 = renderer.Pyramid(1.0f, 0.0f, 0.0f);
+    //openglStuff::Vertex verticesPyramid[10];
+    //memcpy(verticesPyramid, q0.data(), q0.size()*sizeof(openglStuff::Vertex));
+    //memcpy(verticesPyramid+q0.size(), q1.data(), q1.size()*sizeof(openglStuff::Vertex));
 
 
     unsigned int vertexCount = 0;
@@ -500,10 +505,12 @@ int main(void)
 			//std::cout << noise << '\t';
 		}
 
-        
-
 		//std::cout << '\n';
 	}
+
+    std::array<VertexValue, 4> squareData;
+    VertexValue* bufferS = squareData.data();
+    bufferS = renderer.Square(bufferS, 0.0f, 0.0f, 0.0f);
 
     std::cout << "buffer after: " << bufferC << "\n";
     std::cout << "first after: " << &verticesCube.front() << "\n";
@@ -621,7 +628,7 @@ clock_t fps = 0;
 
         //std::cout << "vertex count: " << vertexCount << "\n";
         //std::cout << "num cubes?: " << testyInc << "\n";
-        renderer.Draw(verticesCube.data(), testyInc * 36  * sizeof(openglStuff::Vertex));//25 * vertPerCube * sizeof(openglStuff::Vertex)); // vertexCount * sizeof(float));
+        renderer.Draw(squareData.data(), 4 * sizeof(VertexValue)); //25 * vertPerCube * sizeof(openglStuff::Vertex)); // vertexCount * sizeof(float));
         //256 should be 36
         //std::cout << "size: " << sizeof(float) << "\n";
         //std::cout << "hi3\n";

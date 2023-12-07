@@ -53,8 +53,8 @@ VertexValue* Renderer::Square(VertexValue* target, GLfloat x, GLfloat y, GLfloat
 {
     //openglStuff::Vertex v0;
     target->pos[0] = x+0.0f;
-    target->pos[1] = x+0.0f;
-    target->pos[2] = x+0.0f;
+    target->pos[1] = y+0.0f;
+    target->pos[2] = z+0.0f;
     target->col[0] = 0.83f;
     target->col[1] = 0.70f;
     target->col[2] = 0.44f;
@@ -65,47 +65,35 @@ VertexValue* Renderer::Square(VertexValue* target, GLfloat x, GLfloat y, GLfloat
     //change values after this to be like above
 
     //openglStuff::Vertex v1;
-    v1.Position = glm::vec3(x+0.0f, y+1.0f, z+0.0f);
-    v1.Color = glm::vec3(0.83f, 0.70f, 0.44);
-    v1.Texture = glm::vec2(0.0f, 1.0f);
-
     target->pos[0] = x+0.0f;
-    target->pos[1] = x+0.0f;
-    target->pos[2] = x+0.0f;
+    target->pos[1] = y+1.0f;
+    target->pos[2] = z+0.0f;
     target->col[0] = 0.83f;
     target->col[1] = 0.70f;
     target->col[2] = 0.44f;
     target->tex[0] = 0.0f;
-    target->tex[1] = 0.0f;
+    target->tex[1] = 1.0f;
     target++;
 
     //openglStuff::Vertex v2;
-    v2.Position = glm::vec3(x+1.0f, y+1.0f, z+0.0f);
-    v2.Color = glm::vec3(0.83f, 0.70f, 0.44);
-    v2.Texture = glm::vec2(1.0f, 1.0f);
-
-    target->pos[0] = x+0.0f;
-    target->pos[1] = x+0.0f;
-    target->pos[2] = x+0.0f;
+    target->pos[0] = x+1.0f;
+    target->pos[1] = y+1.0f;
+    target->pos[2] = z+0.0f;
     target->col[0] = 0.83f;
     target->col[1] = 0.70f;
     target->col[2] = 0.44f;
-    target->tex[0] = 0.0f;
-    target->tex[1] = 0.0f;
+    target->tex[0] = 1.0f;
+    target->tex[1] = 1.0f;
     target++;
 
     //openglStuff::Vertex v3;
-    v3.Position = glm::vec3(x+1.0f, y+0.0f,  z+0.0f);
-    v3.Color = glm::vec3(0.83f, 0.70f, 0.44);
-    v3.Texture = glm::vec2(1.0f, 0.0f);
-
-    target->pos[0] = x+0.0f;
-    target->pos[1] = x+0.0f;
-    target->pos[2] = x+0.0f;
+    target->pos[0] = x+1.0f;
+    target->pos[1] = y+0.0f;
+    target->pos[2] = z+0.0f;
     target->col[0] = 0.83f;
     target->col[1] = 0.70f;
     target->col[2] = 0.44f;
-    target->tex[0] = 0.0f;
+    target->tex[0] = 1.0f;
     target->tex[1] = 0.0f;
     target++;
 
